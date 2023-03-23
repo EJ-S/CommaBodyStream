@@ -49,6 +49,8 @@ def get_camera_data():
   else:
     print("Error Taking Picture")
 
+# This gets the acutal data off of the cameras. I have it set so that we only get
+# the balck and white data to save processing time.
 def get_cam_bytes(frame="roadCameraState", front_frame="driverCameraState"):
     sockets = [s for s in (frame, front_frame) if s is not None]
     sm = messaging.SubMaster(sockets)
@@ -77,7 +79,8 @@ class ImageLoader:
 
         self.thread = Thread(target=self.worker)
         self.thread.start()
-
+    
+    #This gets the camera bytes and stores it in the image once every 60 seconds
     def worker(self):
         while not self.stop.is_set():
             # Get current image in separate thread
@@ -121,6 +124,7 @@ def GetImage(frequency):
 
 @app.route("/stream")
 def stream():
+    # This streams the video. Maximum frame rate is 60FPS
     return Response(GetImage(60), mimetype = "multipart/x-mixed-replace; boundary=frame")
 
 if(__name__ == "__main__"):
