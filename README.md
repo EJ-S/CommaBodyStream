@@ -2,7 +2,7 @@
 An addition to openpilot to allow for teleoperation
 
 Clone this repo to a commabody/comma3 device running standard openpilot. This is tested and works on the most current version of OpenPilot as of
-3/21/23. 
+3/21/23. You will clone it to the base of the directoy structure (/data/openpilot).
 
 ### How to Use
 
